@@ -1,4 +1,6 @@
 #
+# https://docs.aws.amazon.com/opsworks/latest/userguide/data-bags.html
+#
 # search('aws_opsworks_app') ->
 #   [
 #     {
@@ -63,8 +65,6 @@
 #   ]
 #
 
-app = search('aws_opsworks_app').first
-dbname = app['data_sources']['database_name']
 dbins = search('aws_opsworks_rds_db_instance').first
 pass = dbins['db_password']
 user = dbins['db_user']
@@ -77,7 +77,7 @@ end
 script "DB connectivity test" do
   interpreter "bash"
   user "root"
-  sql = "insert into tempura values ('#{host} / #{user} / #{pass} / #{dbname}')"
+  sql = "insert into fuji.tempura values ('#{host} / #{user} / #{pass}')"
   code "echo \"#{sql}\" > /tmp/hoge.txt"
-  code "mysql -h #{host} -u #{user} -p#{pass} -D #{dbname} -e \"#{sql}\""
+  code "mysql -h #{host} -u #{user} -p#{pass} -e \"#{sql}\""
 end
