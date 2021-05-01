@@ -9,12 +9,15 @@ user = database[:username]
 pass = database[:password]
 dbname = database[:database]
 
+sql =
+  "insert into food values (101, '#{host}', 'NA', 99); " +
+  "insert into food values (102, '#{dbname}', 'NA', 99); " +
+  "insert into food values (103, '#{user}', 'NA', 99); " +
+  "insert into food values (104, '#{pass}', 'NA', 99); "
+
 commands = <<-"EOS"
 echo "Fuji start"
-mysql -h #{host} -u #{user} -p#{pass} -e "insert into food values (101, '#{host}', 'NA', 99);"
-mysql -h #{host} -u #{user} -p#{pass} -e "insert into food values (102, '#{dbname}', 'NA', 99);"
-mysql -h #{host} -u #{user} -p#{pass} -e "insert into food values (103, '#{user}', 'NA', 99);"
-mysql -h #{host} -u #{user} -p#{pass} -e "insert into food values (104, '#{pass}', 'NA', 99);"
+mysql -h #{host} -u #{user} -p#{pass} -D #{dbname} -e "#{sql}"
 echo "Fuji end"
 EOS
 
