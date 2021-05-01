@@ -1,7 +1,7 @@
 app = search(:aws_opsworks_app).first
 app_path = "/srv/#{app['shortname']}"
 
-puts(app.inspect)
+raise app.inspect
 
 database = app[:database]
 host = database[:host]
@@ -9,7 +9,7 @@ user = database[:username]
 pass = database[:password]
 dbname = database[:database]
 
-sql =
+sql = 
   "insert into food values (101, '#{host}', 'NA', 99); " +
   "insert into food values (102, '#{dbname}', 'NA', 99); " +
   "insert into food values (103, '#{user}', 'NA', 99); " +
