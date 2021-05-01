@@ -1,56 +1,58 @@
-# 
-# data_bag_item[
-#   "aws_opsworks_app",
-#   "nodejs_sample_app",
-#   {
-#     "app_id"=>"ced43a83-cea9-4274-90d0-2719b161776e",
-#     "app_source"=>{
-#       "password"=>nil,
-#       "revision"=>nil,
-#       "ssh_key"=>nil,
-#       "type"=>"git",
-#       "url"=>"https://github.com/awslabs/opsworks-windows-demo-nodejs.git",
-#       "user"=>nil
-#     },
-#     "attributes"=>{
-#       "auto_bundle_on_deploy"=>true,
-#       "aws_flow_ruby_settings"=>{},
-#       "document_root"=>nil,
-#       "rails_env"=>nil
-#     },
-#     "data_sources"=>[
-#       {
-#         "arn"=>"arn:aws:rds:ap-northeast-1:142901573738:db:fuji-rdsmaria1",
-#         "type"=>"RdsDbInstance",
-#         "database_name"=>"food"
-#       }
-#     ],
-#     "domains"=>[
-#       "nodejs_sample_app"
-#     ],
-#     "enable_ssl"=>false,
-#     "environment"=>{
-#       "APP_ADMIN_EMAIL"=>"admin@example.com"
-#     },
-#     "name"=>"Node.js Sample App",
-#     "shortname"=>"nodejs_sample_app",
-#     "ssl_configuration"=>{
-#       "certificate"=>nil,
-#       "private_key"=>nil,
-#       "chain"=>nil
-#     },
-#     "type"=>"other",
-#     "deploy"=>true,
-#     "id"=>"nodejs_sample_app"
-#   }
+#
+# [
+#   data_bag_item[
+#     "aws_opsworks_app",
+#     "nodejs_sample_app",
+#     {
+#       "app_id"=>"ced43a83-cea9-4274-90d0-2719b161776e",
+#       "app_source"=>{
+#         "password"=>nil,
+#         "revision"=>nil,
+#         "ssh_key"=>nil,
+#         "type"=>"git",
+#         "url"=>"https://github.com/awslabs/opsworks-windows-demo-nodejs.git",
+#         "user"=>nil
+#       },
+#       "attributes"=>{
+#         "auto_bundle_on_deploy"=>true,
+#         "aws_flow_ruby_settings"=>{},
+#         "document_root"=>nil,
+#         "rails_env"=>nil
+#       },
+#       "data_sources"=>[
+#         {
+#           "arn"=>"arn:aws:rds:ap-northeast-1:142901573738:db:fuji-rdsmaria1",
+#           "type"=>"RdsDbInstance",
+#           "database_name"=>"food"
+#         }
+#       ],
+#       "domains"=>[
+#         "nodejs_sample_app"
+#       ],
+#       "enable_ssl"=>false,
+#       "environment"=>{
+#         "APP_ADMIN_EMAIL"=>"admin@example.com"
+#       },
+#       "name"=>"Node.js Sample App",
+#       "shortname"=>"nodejs_sample_app",
+#       "ssl_configuration"=>{
+#         "certificate"=>nil,
+#         "private_key"=>nil,
+#         "chain"=>nil
+#       },
+#       "type"=>"other",
+#       "deploy"=>true,
+#       "id"=>"nodejs_sample_app"
+#     }
+#   ]
 # ]
+#
+#
+# aws_opsworks_rds_db_instance
+#
 
-
-apps = search(:aws_opsworks_app)
-app = apps.first
-app_path = "/srv/#{app['shortname']}"
-
-raise apps.inspect
+result = search('aws_opsworks_rds_db_instance')
+raise result.inspect
 
 database = app[:database]
 host = database[:host]
